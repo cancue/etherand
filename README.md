@@ -1,6 +1,6 @@
 # etherand
 
-## tree 
-├─ smartcontract  
-├─ oracle  
-└─ web
+## tree
+├─ backend  
+├─ frontend  
+└─ smartcontract
