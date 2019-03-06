@@ -1,7 +1,11 @@
 const helpers = require("./helpers.js")
 const Etherand = artifacts.require("./Etherand.sol")
+const CallForTester = artifacts.require("./lib/CallForTester.sol")
 
 contract("Committee", (users) => {
+  const committee = users[0]
+  const noCommittee = users[1]
+  const targetAddress = users[2]
   let subject
 
   before(async () => {
@@ -9,10 +13,6 @@ contract("Committee", (users) => {
   })
 
   describe("setCommittee", () => {
-    const committee = users[0]
-    const noCommittee = users[1]
-    const targetAddress = users[2]
-
     describe("when sender is not committee", () => {
       it("reverts", async () => {
         await helpers.assertRevert(
@@ -33,6 +33,41 @@ contract("Committee", (users) => {
         const newCommittee = await subject.committee()
         assert.equal(newCommittee, targetAddress)
       })
+    })
+  })
+})
+
+contract("callFor", (users) => {
+  const committee = users[0]
+  const noCommittee = users[1]
+  const targetAddress = users[2]
+  let subject, targetContract, validInputs
+
+  before(async () => {
+    subject = await Etherand.new()
+    targetContract = await CallForTester.new()
+    await targetContract.setOwner(subject.address)
+    validInputs = [
+      targetContract.address,
+      60000,
+      targetContract.contract.methods.setOwner(targetAddress).encodeABI()
+    ]
+  })
+
+  describe("when sender is not committee", () => {
+    it("reverts", async () => {
+      await helpers.assertRevert(
+        subject.callFor(...validInputs, { from: noCommittee })
+      )
+    })
+  })
+
+  describe("when sender is committee", () => {
+    it("should work", async () => {
+      await subject.callFor(...validInputs, { from: committee })
+
+      const owner = await targetContract.owner()
+      expect(owner).to.equal(targetAddress)
     })
   })
 })
