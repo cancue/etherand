@@ -1,0 +1,18 @@
+{
+  "name": "etherand-contracts",
+  "version": "0.0.1",
+  "description": "etherand smart contracts",
+  "scripts": {
+    "migrate": "truffle migrate --reset",
+    "test": "truffle test"
+  },
+  "keywords": [
+    "etherand",
+    "ethereum",
+    "random",
+    "smart",
+    "contract"
+  ],
+  "author": "M.H. Kang",
+  "license": "MIT"
+}
