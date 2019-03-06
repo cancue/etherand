@@ -7,15 +7,15 @@
 
 ```
 ganache-cli
-truffle migrate
+yarn build
 ```
 
 ### Unit Test
 ```
-truffle test
+yarn test
 ```
 
 ### Lints
 ```
-solhint contracts/*.sol
+yarn lint
 ```

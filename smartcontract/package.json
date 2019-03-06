@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "etherand smart contracts",
   "scripts": {
-    "migrate": "truffle migrate --reset",
-    "test": "truffle test"
+    "build": "truffle migrate --reset",
+    "test": "truffle test",
+    "lint": "solhint contracts/**/*.sol"
   },
   "keywords": [
     "etherand",
