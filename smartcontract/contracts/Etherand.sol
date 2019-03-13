@@ -136,7 +136,7 @@ contract EtherandCustomRequest is Committee {
       request.requiredBlockHeight >= block.number &&
       request.requiredEntropyHeight >= entropyHeight;
     _number = request.number;
-    _entropy = entropy + block.timestamp + uint256(msg.sender);
+    _entropy = entropy;
   }
 
   function withdraw() external {
@@ -166,12 +166,18 @@ contract Etherand is EtherandCustomRequest {
   }
 
   /* FUNCTION */
-  function increaseEntropy(uint256 _number) external {
-    _increaseEntropy(_number);
-    emit IncreaseEntropy(0, msg.sender, _number);
+  function getEntropy(uint256 _number) external returns (uint256) {
+    increaseEntropy(_number);
+
+    return entropy;
   }
 
-  function getEntropy() external view returns (uint256 _entropy) {
-    _entropy = entropy + block.timestamp + uint256(msg.sender);
+  function getUnsafeEntropy() external view returns (uint256) {
+    return entropy + block.timestamp;
+  }
+
+  function increaseEntropy(uint256 _number) public {
+    _increaseEntropy(_number);
+    emit IncreaseEntropy(0, msg.sender, _number);
   }
 }
