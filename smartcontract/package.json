@@ -5,7 +5,8 @@
   "scripts": {
     "build": "truffle migrate --reset",
     "test": "truffle test",
-    "lint": "solhint contracts/**/*.sol"
+    "lint": "solhint contracts/**/*.sol",
+    "dev": "ganache-cli --account \"$(cat privateKey),100000000000000000000\" | npm run build"
   },
   "keywords": [
     "etherand",
@@ -15,5 +16,9 @@
     "contract"
   ],
   "author": "M.H. Kang",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ganache-cli": "^6.4.1",
+    "truffle": "^5.0.8"
+  }
 }
