@@ -1,6 +1,4 @@
 node_modules/
-/app/dist/
-/build/
 
 # Ignore all logfiles and tempfiles.
 *.log

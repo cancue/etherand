@@ -1,6 +1,11 @@
 # etherand
 
-## tree
-├─ backend  
-├─ frontend  
-└─ smartcontract
+## Project setup
+```
+$ npm install
+```
+
+## Run
+```
+$ npm start
+```
